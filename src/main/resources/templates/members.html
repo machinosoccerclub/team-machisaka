@@ -1,0 +1,41 @@
+<!DOCTYP html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>チームまちサカ</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div class="container">
+  <div class="main">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>学年</th>
+        <th>名前</th>
+      </tr>
+      </thead>
+      <tbody th:each="member: ${members}">
+      <tr>
+        <td>
+          <a th:href="@{${member.thumbnailUrl}}" target="_blank">
+            <img src="@{${member.thumbnailUrl}}" alt="${member.rawTitle}"
+                 height="36" width="36"
+            />
+          </a>
+        </td>
+        <td th:text="${member.grade}">タスク1</td>
+        <td th:text="${member.name}">タスク1</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
