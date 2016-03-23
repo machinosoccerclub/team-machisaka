@@ -26,8 +26,9 @@
       <tr>
         <td>
           <a th:href="@{${member.thumbnailUrl}}" target="_blank">
-            <img src="@{${member.thumbnailUrl}}" alt="${member.rawTitle}"
-                 height="36" width="36"
+            <img th:src="@{${member.thumbnailUrl}}" th:alt="${member.rawTitle}"
+                 class="img-thumbnail"
+                 height="48" width="48"
             />
           </a>
         </td>
