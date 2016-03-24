@@ -14,28 +14,66 @@
 <body>
 <div class="container">
   <div class="main">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>学年</th>
-        <th>名前</th>
-      </tr>
-      </thead>
-      <tbody th:each="member: ${members}">
-      <tr>
-        <td>
-          <a th:href="@{${member.thumbnailUrl}}" target="_blank">
-            <img th:src="@{${member.thumbnailUrl}}" th:alt="${member.rawTitle}"
-                 class="img-thumbnail"
-                 height="48" width="48"
-            />
-          </a>
-        </td>
-        <td th:text="${member.grade}">タスク1</td>
-        <td th:text="${member.name}">タスク1</td>
-      </tr>
-    </table>
+    <div>
+      <form th:action="@{/members}" method="get">
+        <fieldset th:object="${searchMemberForm}">
+          <legend>検索条件</legend>
+          <!--
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">名前</label>
+            <div class="col-sm-10">
+              <input id="name" type="text" name="name" class=""
+                     th:field="*{name}"/>
+            <span th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}" class="text-danger"></span>
+              <span class="help-block">姓名、フリガナで検索します</span>
+            </div>
+          </div>
+          -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">学年</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label th:each="grade: ${T(machisoccer.members.models.Grade).values()}"
+                       class="checkbox-inline" th:inline="text">
+                  <input type="checkbox" th:field="*{grades}"
+                         th:value="${grade}" th:text="${grade.label}"></label>
+              </div>
+            <span th:if="${#fields.hasErrors('grades')}" class="text-danger"
+                  th:errors="*{grades}">Error</span>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-10">
+            <input type="submit" class="btn btn-success" value="検索"/>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>写真</th>
+          <th>学年</th>
+          <th>名前</th>
+        </tr>
+        </thead>
+        <tbody th:each="member: ${members}">
+        <tr>
+          <td>
+            <a th:href="@{${member.thumbnailUrl}}" target="_blank" class="">
+              <img th:src="@{${member.thumbnailUrl}}" th:alt="${member.rawTitle}"
+                   class="thumbnail"
+                   height="48" width="48"
+              />
+            </a>
+          </td>
+          <td th:text="${member.grade}">タスク1</td>
+          <td th:text="${member.name}">タスク1</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 </body>
