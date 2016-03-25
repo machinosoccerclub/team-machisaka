@@ -129,7 +129,9 @@ bootRun {
   def debugOpts = project.hasProperty('debugPort') ? ["-Xdebug",
                  "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=${project.debugPort ?: 5005}"] : []
 
-  jvmArgs = appOpts + stdOpts + gcOpts + debugOpts
+  def proxyOpts = ['-Dhttp.proxyHost=localhost', '-Dhttps.proxyHost=localhost',
+                    '-Dhttp.proxyPort=8880', '-Dhttps.proxyPort=8880']
+  jvmArgs = appOpts + stdOpts + gcOpts + debugOpts + proxyOpts
 }
 
 bootRepackage {

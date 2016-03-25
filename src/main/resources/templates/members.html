@@ -60,29 +60,60 @@
         </fieldset>
       </form>
     </div>
-    <div>
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>写真</th>
-          <th>学年</th>
-          <th>名前</th>
-        </tr>
-        </thead>
-        <tbody th:each="member: ${members}">
-        <tr>
-          <td>
-            <a th:href="@{${member.thumbnailUrl}}" target="_blank" class="">
-              <img th:src="@{${member.thumbnailUrl}}" th:alt="${member.rawTitle}"
-                   class="thumbnail"
-                   height="48" width="48"
-              />
+
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#tile" aria-controls="tile" role="tab" data-toggle="tab">
+          <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>並べて表示</a>
+      </li>
+      <li role="presentation">
+        <a href="#list" aria-controls="list" role="tab" data-toggle="tab">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>リスト表示</a>
+      </li>
+    </ul>
+
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <!-- Tile tab -->
+      <div role="tabpanel" class="tab-pane active" id="tile">
+        <div class="row">
+          <div class="col-xs-6 col-md-3" th:each="member: ${members}">
+            <a href="@{${member.photoUrl}}" class="thumbnail" target="_blank">
+              <img th:src="@{${member.photoUrl}}" th:alt="${member.rawTitle}" />
+              <div class="caption"><span th:text="${member.name}">なまえ・なまえ</span></div>
             </a>
-          </td>
-          <td th:text="${member.grade}">タスク1</td>
-          <td th:text="${member.name}">タスク1</td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="list">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>写真</th>
+            <th>学年</th>
+            <th>名前</th>
+          </tr>
+          </thead>
+          <tbody th:each="member: ${members}">
+          <tr>
+            <td>
+              <a th:href="@{${member.thumbnailUrl}}" target="_blank" class="">
+                <img th:src="@{${member.thumbnailUrl}}" th:alt="${member.rawTitle}"
+                     class="thumbnail"
+                     height="48" width="48"
+                />
+              </a>
+            </td>
+            <td th:text="${member.grade}">タスク1</td>
+            <td th:text="${member.name}">タスク1</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 
