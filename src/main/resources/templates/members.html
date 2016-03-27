@@ -82,7 +82,7 @@
       <div role="tabpanel" class="tab-pane active" id="tile">
         <div class="row">
           <div class="col-xs-6 col-md-3" th:each="member: ${members}">
-            <a href="@{${member.photoUrl}}" class="thumbnail" target="_blank">
+            <a th:href="@{${member.photoUrl}}" class="thumbnail" target="_blank">
               <img th:src="@{${member.photoUrl}}" th:alt="${member.rawTitle}" />
               <div class="caption"><span th:text="${member.name}">なまえ・なまえ</span></div>
             </a>

@@ -104,6 +104,10 @@ compileJava {
 //
 //checkstyleMain.finalizedBy checkstyleHtml
 
+jar {
+  baseName = 'team-machisaka'
+}
+
 bootRun {
   addResources = true
 
