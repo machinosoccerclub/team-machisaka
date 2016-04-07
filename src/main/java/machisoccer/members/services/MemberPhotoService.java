@@ -1,5 +1,6 @@
 package machisoccer.members.services;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberPhotoService {
   private final GooglePicasa googlePicasa;
+
+  private final Comparator<MemberPhoto> byGrade = (m1, m2) -> m1.getGrade().compareTo(m2.getGrade());
+  private final Comparator<MemberPhoto> byName = (m1, m2) -> m1.getName().compareTo(m2.getName());
 
   @Autowired
   public MemberPhotoService(GooglePicasa googlePicasa) {
@@ -31,6 +35,7 @@ public class MemberPhotoService {
     return googlePicasa.listPhotos().stream()
       .map(this::createMemberPhoto)
       .filter(m -> gradeLabels.contains(m.getGrade()))
+      .sorted(byGrade.thenComparing(byName))
       .collect(Collectors.toList());
   }
 
